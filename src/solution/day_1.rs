@@ -7,39 +7,17 @@ impl Solution for Day<1> {
     type PartTwo = u32;
 
     fn solve_sample(input: &str) -> Self::Sample {
-        let pairs = create_pairs(input);
-
-        let mut acc: u32 = 0;
-
-        for pair in pairs.iter() {
-            if pair.0 <= pair.1 {
-                acc += pair.1 - pair.0;
-            } else {
-                acc += pair.0 + pair.1;
-            }
-        }
-
-        acc
+        Self::solve_part_one(input)
     }
 
     fn solve_part_one(input: &str) -> Self::PartOne {
-        let pairs = create_pairs(input);
+        let sorted_pairs = create_sorted_pairs(input);
 
-        let mut acc: u32 = 0;
-
-        for pair in pairs.iter() {
-            let (m, mx) = { (pair.0.min(pair.1), pair.0.max(pair.1)) };
-            if m == mx {
-                continue;
-            }
-            acc += mx - m;
-        }
-
-        acc
+        sorted_pairs.iter().map(|(l, r)| l.abs_diff(*r)).sum()
     }
 
     fn solve_part_two(input: &str) -> Self::PartTwo {
-        let pairs = create_pairs_unsorted(input);
+        let pairs = create_pairs(input);
         let uniques = pairs.iter().map(|p| p.0).collect::<HashSet<u32>>();
         let mut appearances: HashMap<u32, u32> = HashMap::new();
 
@@ -52,11 +30,10 @@ impl Solution for Day<1> {
     }
 }
 
-fn create_pairs(input: &str) -> Vec<(u32, u32)> {
-    let mut left: Vec<u32> = vec![];
-    let mut right: Vec<u32> = vec![];
+fn create_sorted_pairs(input: &str) -> Vec<(u32, u32)> {
+    let line_count = input.lines().count();
 
-    populate_arrays(input, &mut left, &mut right);
+    let (mut left, mut right) = split_into_columns(input, line_count);
 
     left.sort();
     right.sort();
@@ -69,11 +46,10 @@ fn create_pairs(input: &str) -> Vec<(u32, u32)> {
     pairs
 }
 
-fn create_pairs_unsorted(input: &str) -> Vec<(u32, u32)> {
-    let mut left: Vec<u32> = vec![];
-    let mut right: Vec<u32> = vec![];
+fn create_pairs(input: &str) -> Vec<(u32, u32)> {
+    let line_count = input.lines().count();
 
-    populate_arrays(input, &mut left, &mut right);
+    let (mut left, mut right) = split_into_columns(input, line_count);
 
     let mut pairs: Vec<(u32, u32)> = Vec::with_capacity(left.len());
     while let Some(l) = left.pop() {
@@ -83,7 +59,10 @@ fn create_pairs_unsorted(input: &str) -> Vec<(u32, u32)> {
     pairs
 }
 
-fn populate_arrays(input: &str, left: &mut Vec<u32>, right: &mut Vec<u32>) {
+fn split_into_columns(input: &str, line_count: usize) -> (Vec<u32>, Vec<u32>) {
+    let mut left: Vec<u32> = Vec::with_capacity(line_count);
+    let mut right: Vec<u32> = Vec::with_capacity(line_count);
+
     for line in input.lines() {
         let (l, r) = line.split_once("   ").unwrap();
         let left_num = l.trim().parse::<u32>().unwrap();
@@ -91,4 +70,6 @@ fn populate_arrays(input: &str, left: &mut Vec<u32>, right: &mut Vec<u32>) {
         left.push(left_num);
         right.push(right_num);
     }
+
+    (left, right)
 }
