@@ -4,14 +4,16 @@ use criterion::{criterion_group, criterion_main, Criterion};
 use std::hint::black_box;
 
 fn day1_benchmark(c: &mut Criterion) {
-    c.bench_function("day 1 part 1 solution", |b| {
-        b.iter(|| black_box(Day::<1>::solve_part_one))
-    });
+    c.bench_function("d1-p1", |b| b.iter(|| black_box(Day::<1>::solve_part_one)));
 
-    c.bench_function("day 1 part 2 solution", |b| {
-        b.iter(|| black_box(Day::<1>::solve_part_two))
-    });
+    c.bench_function("d1-p2", |b| b.iter(|| black_box(Day::<1>::solve_part_two)));
 }
 
-criterion_group!(benches, day1_benchmark);
+fn day2_benchmark(c: &mut Criterion) {
+    c.bench_function("d2-p1", |b| b.iter(|| black_box(Day::<2>::solve_part_one)));
+
+    c.bench_function("d2-p2", |b| b.iter(|| black_box(Day::<2>::solve_part_two)));
+}
+
+criterion_group!(benches, day1_benchmark, day2_benchmark);
 criterion_main!(benches);

@@ -1,4 +1,5 @@
 mod day_1;
+mod day_2;
 
 use std::fmt::Display;
 use std::fs;
@@ -31,15 +32,25 @@ pub trait Solution: AdventDay {
     fn solve() {
         let sample_path = format!("days/{}/sample.txt", Self::day_name());
         let input_path = format!("days/{}/input.txt", Self::day_name());
-        let sample_data = fs::read_to_string(&sample_path).unwrap_or_else(|_| panic!("there was no sample file for day {} with path {}",
+        let sample_data = fs::read_to_string(&sample_path).unwrap_or_else(|_| {
+            panic!(
+                "there was no sample file for day {} with path {}",
                 Self::day_name(),
-                sample_path));
-        let data = fs::read_to_string(&input_path).unwrap_or_else(|_| panic!("there was no input file for day {} with path {}",
+                sample_path
+            )
+        });
+        let data = fs::read_to_string(&input_path).unwrap_or_else(|_| {
+            panic!(
+                "there was no input file for day {} with path {}",
                 Self::day_name(),
-                input_path));
+                input_path
+            )
+        });
 
+        println!("Day {}: ", Self::DAY_NUMBER);
         println!("Sample solution: {}", Self::solve_sample(&sample_data));
         println!("Part one solution: {}", Self::solve_part_one(&data));
         println!("Part two solution: {}", Self::solve_part_two(&data));
+        println!();
     }
 }
