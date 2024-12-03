@@ -1,4 +1,4 @@
-use crate::solution::{Day, Solution};
+use crate::day::{Day, Solution};
 use std::collections::{HashMap, HashSet};
 
 impl Solution for Day<1> {

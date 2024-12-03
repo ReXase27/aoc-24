@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 criterion = { version = "0.5.1", features = ["html_reports"] }
+regex = "1.11.1"
 
 [[bench]]
 name = "solution_benchmarks"

@@ -1,5 +1,6 @@
 mod day_1;
 mod day_2;
+mod day_3;
 
 use std::fmt::Display;
 use std::fs;
@@ -48,9 +49,9 @@ pub trait Solution: AdventDay {
         });
 
         println!("Day {}: ", Self::DAY_NUMBER);
-        println!("Sample solution: {}", Self::solve_sample(&sample_data));
-        println!("Part one solution: {}", Self::solve_part_one(&data));
-        println!("Part two solution: {}", Self::solve_part_two(&data));
+        println!("Sample day: {}", Self::solve_sample(&sample_data));
+        println!("Part one day: {}", Self::solve_part_one(&data));
+        println!("Part two day: {}", Self::solve_part_two(&data));
         println!();
     }
 }

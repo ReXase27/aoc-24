@@ -1,3 +1,3 @@
-mod solution;
+mod day;
 
-pub use solution::*;
+pub use day::*;

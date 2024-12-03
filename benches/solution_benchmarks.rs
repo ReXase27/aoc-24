@@ -15,5 +15,11 @@ fn day2_benchmark(c: &mut Criterion) {
     c.bench_function("d2-p2", |b| b.iter(|| black_box(Day::<2>::solve_part_two)));
 }
 
-criterion_group!(benches, day1_benchmark, day2_benchmark);
+fn day3_benchmark(c: &mut Criterion) {
+    c.bench_function("d3-p1", |b| b.iter(|| black_box(Day::<3>::solve_part_one)));
+
+    c.bench_function("d3-p2", |b| b.iter(|| black_box(Day::<3>::solve_part_two)));
+}
+
+criterion_group!(benches, day1_benchmark, day2_benchmark, day3_benchmark);
 criterion_main!(benches);

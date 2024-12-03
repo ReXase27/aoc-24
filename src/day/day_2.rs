@@ -1,4 +1,26 @@
-use crate::solution::{Day, Solution};
+use crate::day::{Day, Solution};
+
+impl Solution for Day<2> {
+    type Sample = u32;
+    type PartOne = u32;
+    type PartTwo = u32;
+
+    fn solve_sample(input: &str) -> Self::Sample {
+        Self::solve_part_one(input)
+    }
+
+    fn solve_part_one(input: &str) -> Self::PartOne {
+        let levels: Vec<Level> = input.lines().map(Level::from).collect();
+
+        levels.iter().filter(|l| l.is_safe(1, 3)).count() as u32
+    }
+
+    fn solve_part_two(input: &str) -> Self::PartTwo {
+        let levels: Vec<Level> = input.lines().map(Level::from).collect();
+
+        levels.iter().filter(|l| l.is_partially_safe(1, 3)).count() as u32
+    }
+}
 
 #[derive(Debug)]
 struct Level {
@@ -35,29 +57,5 @@ impl From<&str> for Level {
             .collect();
 
         Level { reports }
-    }
-}
-
-impl Solution for Day<2> {
-    type Sample = u32;
-    type PartOne = u32;
-    type PartTwo = u32;
-
-    fn solve_sample(input: &str) -> Self::Sample {
-        let levels: Vec<Level> = input.lines().map(Level::from).collect();
-
-        levels.iter().filter(|l| l.is_safe(1, 3)).count() as u32
-    }
-
-    fn solve_part_one(input: &str) -> Self::PartOne {
-        let levels: Vec<Level> = input.lines().map(Level::from).collect();
-
-        levels.iter().filter(|l| l.is_safe(1, 3)).count() as u32
-    }
-
-    fn solve_part_two(input: &str) -> Self::PartTwo {
-        let levels: Vec<Level> = input.lines().map(Level::from).collect();
-
-        levels.iter().filter(|l| l.is_partially_safe(1, 3)).count() as u32
     }
 }

@@ -1,7 +1,7 @@
-use crate::solution::Day;
-use crate::solution::Solution;
+use crate::day::Day;
+use crate::day::Solution;
 
-mod solution;
+mod day;
 
 macro_rules! solve_for_days {
     ($day:literal) => {
@@ -14,5 +14,5 @@ macro_rules! solve_for_days {
 }
 
 fn main() {
-    solve_for_days![1, 2];
+    solve_for_days![1, 2, 3];
 }
