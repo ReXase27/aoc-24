@@ -1,14 +1,14 @@
 use crate::day::{Day, Solution};
 
 const DIRECTIONS: [(i32, i32); 8] = [
-    (1, 0),   // vertical down
-    (0, 1),   // horizontal right
-    (1, 1),   // diagonal down-right
-    (1, -1),  // diagonal down-left
-    (-1, 0),  // vertical up (for backwards check)
-    (0, -1),  // horizontal left (for backwards check)
-    (-1, -1), // diagonal up-left (for backwards check)
-    (-1, 1),  // diagonal up-right (for backwards check)
+    (1, 0),
+    (0, 1),
+    (1, 1),
+    (1, -1),
+    (-1, 0),
+    (0, -1),
+    (-1, -1),
+    (-1, 1),
 ];
 
 const TARGET_WORD: [char; 4] = ['X', 'M', 'A', 'S'];

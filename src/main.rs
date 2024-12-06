@@ -14,5 +14,5 @@ macro_rules! solve_for_days {
 }
 
 fn main() {
-    solve_for_days![1, 2, 3, 4];
+    solve_for_days![1, 2, 3, 4, 5];
 }
